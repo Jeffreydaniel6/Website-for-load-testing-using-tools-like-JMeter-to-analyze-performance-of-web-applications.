@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Test Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to the Load Testing Web Application</h1>
+    <h2>About</h2>
+    <p>This application is designed to perform load testing on web applications using JMeter.</p>
+    <h2>Getting Started</h2>
+    <p>Follow the instructions below to set up and run load tests.</p>
+    
+    <h2>Upload Test File</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="testFile" required>
+        <button type="submit">Upload</button>
+    </form>
+    
+    <button id="runLoadTest">Run Load Test</button>    
+    <div id="output" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; display: none;">
+        <h2>Load Test Results</h2>
+        <pre id="outputData"></pre>
+    </div>
+
+    
+    <div id="output" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; display: none;">
+        <h2>Load Test Results</h2>
+        <pre id="outputData"></pre>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            });
+        });
+
+        document.getElementById('runLoadTest').addEventListener('click', function() {
+            fetch('/run-load-test')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('outputData').textContent = JSON.stringify(data, null, 2);
+                    document.getElementById('output').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching results:', error));
+
+            document.getElementById('outputData').textContent = JSON.stringify(simulatedData, null, 2);
+            document.getElementById('output').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

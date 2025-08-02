@@ -1,0 +1,10 @@
+Request 1: success, response_time: 100ms
+Request 2: success, response_time: 150ms
+Request 3: success, response_time: 200ms
+Request 4: failure, response_time: 300ms
+Request 5: success, response_time: 250ms
+Request 6: success, response_time: 150ms
+Request 7: failure, response_time: 400ms
+Request 8: success, response_time: 100ms
+Request 9: success, response_time: 200ms
+Request 10: success, response_time: 150ms
